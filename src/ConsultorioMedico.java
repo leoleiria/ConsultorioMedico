@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import model.Paciente;
+import repositorio.RepositorioPacientes;
 import util.DateTimeUtil;
 
 /**
@@ -13,13 +14,13 @@ import util.DateTimeUtil;
  */
 public class ConsultorioMedico {
 
-    private static ArrayList<Paciente> listaPacientes;
+    //private static ArrayList<Paciente> listaPacientes;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        listaPacientes = new ArrayList<>();
+        //listaPacientes = new ArrayList<>();
 
         int opcao = 0;
         do {
@@ -60,7 +61,7 @@ public class ConsultorioMedico {
             LocalDate dataNascimento = DateTimeUtil.stringToDate(dataString);
         
             Paciente paciente = new Paciente(rg, nome, dataNascimento);
-            listaPacientes.add(paciente);
+            RepositorioPacientes.getInstance().add(paciente);
             System.out.println("Cadastro realizado com sucesso!");
         } catch(Exception e){
             System.out.println("Data de Nascimento invalida!");
@@ -69,24 +70,21 @@ public class ConsultorioMedico {
 
     private static void listarPacientes() {
         System.out.println("\nListando Pacientes...");
-        if (listaPacientes.isEmpty()) {
+        if (RepositorioPacientes.getInstance().estaVazio()) {
             System.out.println("Nao ha pacientes cadastrados!");
-        } else {
- if(listaPacientes.isEmpty()){
-            System.out.println("Nenhum paciente cadastrado!");
         }
         else{
             System.out.print(String.format("%-10s","|RG"));
             System.out.print(String.format("%-20s","|NOME"));
             System.out.println(String.format("%-10s","|DATA NASCIMENTO"));
-            for(Paciente p: listaPacientes){
+            for(Paciente p: RepositorioPacientes.getInstance().getPacientes()){
                 System.out.print(String.format("%-10s",p.getRg()));
                 System.out.print(String.format("%-20s",p.getNome()));
                 String dataUtil = DateTimeUtil.dateToString(p.getDataNascimento());
                 System.out.println(String.format("%-10s",dataUtil));
 
             }
-        }        }
+        }        
     }
 
 }
