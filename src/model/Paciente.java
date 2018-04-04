@@ -1,0 +1,65 @@
+package model;
+
+import java.time.LocalDate;
+import java.util.Objects;
+import util.DateTimeUtil;
+
+/**
+ *
+ * @author lhries
+ */
+public class Paciente {
+    private String rg, nome;
+    private LocalDate dataNascimento;
+
+    public Paciente(String nome, String rg, LocalDate dataNascimento) {
+        this.nome = nome;
+        this.rg = rg;
+        this.dataNascimento = dataNascimento;
+    }
+
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Paciente other = (Paciente) obj;
+        if (!Objects.equals(this.rg, other.rg)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.rg);
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return rg+" - "+nome + ", " + DateTimeUtil.dateToString(dataNascimento);
+    }
+    
+    
+    
+    
+    
+}
