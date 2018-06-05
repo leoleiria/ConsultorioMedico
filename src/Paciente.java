@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author LHRIES
+ * @author leoleiria
  */
 public class Paciente {
     private String rg, nome;
