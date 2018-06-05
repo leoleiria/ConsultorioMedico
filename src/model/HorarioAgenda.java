@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-
+//verificar
 public class HorarioAgenda implements Comparable<HorarioAgenda> {
     private LocalDateTime horario;
     private Paciente paciente;
